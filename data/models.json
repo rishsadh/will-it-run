@@ -1,0 +1,386 @@
+{
+  "schema": 1,
+  "generated_by": "hand-curated",
+  "read_date": "2026-11-10",
+  "memory_formula": "memory_gb = file_gb * 1.15 + 1.0 (estimate for context cache and runtime)",
+  "popularity_source": {
+    "url": "https://ollama.com/library?sort=popular",
+    "read_date": "2026-11-10",
+    "what": "Used to pick widely used open models. Pull counts as read: llama3.1 121M, deepseek-r1 94.9M, llama3.2 87.3M, qwen2.5 45.3M, qwen3 43M, gemma3 41.8M, mistral 34.2M, qwen2.5-coder 23.5M, gpt-oss 14.8M. Stable Diffusion XL was added by hand to cover the images goal."
+  },
+  "apps": {
+    "ollama": {
+      "name": "Ollama",
+      "url": "https://ollama.com/download",
+      "os": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "source_url": "https://ollama.com/download",
+      "read_date": "2026-11-10"
+    },
+    "comfyui": {
+      "name": "ComfyUI",
+      "url": "https://github.com/comfyanonymous/ComfyUI",
+      "os": [
+        "windows",
+        "macos"
+      ],
+      "source_url": "https://github.com/comfyanonymous/ComfyUI",
+      "read_date": "2026-11-10",
+      "note": "Desktop app on Windows and macOS per the README. Licence GPL-3.0."
+    },
+    "lmstudio": {
+      "name": "LM Studio",
+      "url": "https://lmstudio.ai/docs/app/system-requirements",
+      "os": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "source_url": "https://lmstudio.ai/docs/app/system-requirements",
+      "read_date": "2026-11-10",
+      "note": "Another app that runs many of the text models. macOS needs an Apple chip and macOS 14 or newer. Check its catalog for each model."
+    }
+  },
+  "models": [
+    {
+      "id": "llama3.2-3b",
+      "name": "Llama 3.2 3B",
+      "family": "Llama",
+      "size_class": "small",
+      "params_b": 3,
+      "tag": "llama3.2:3b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 2.0,
+      "memory_gb": 3.3,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "writing"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Llama 3.2 Community License",
+      "licence_source_url": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/llama3.2/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "gemma3-4b",
+      "name": "Gemma 3 4B",
+      "family": "Gemma",
+      "size_class": "small",
+      "params_b": 4,
+      "tag": "gemma3:4b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 3.4,
+      "memory_gb": 4.9,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "writing"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Gemma Terms of Use",
+      "licence_source_url": "https://ollama.com/library/gemma3",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/gemma3/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "mistral-7b",
+      "name": "Mistral 7B",
+      "family": "Mistral",
+      "size_class": "medium",
+      "params_b": 7,
+      "tag": "mistral:7b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 4.4,
+      "memory_gb": 6.1,
+      "memory_basis": "estimate",
+      "context_k": 32,
+      "goals": [
+        "chat",
+        "writing"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Apache license",
+      "licence_source_url": "https://ollama.com/library/mistral",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/mistral/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "qwen25-coder-7b",
+      "name": "Qwen2.5 Coder 7B",
+      "family": "Qwen",
+      "size_class": "medium",
+      "params_b": 7,
+      "tag": "qwen2.5-coder:7b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 4.7,
+      "memory_gb": 6.4,
+      "memory_basis": "estimate",
+      "context_k": 32,
+      "goals": [
+        "coding"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Apache 2.0",
+      "licence_source_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/qwen2.5-coder/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "llama31-8b",
+      "name": "Llama 3.1 8B",
+      "family": "Llama",
+      "size_class": "medium",
+      "params_b": 8,
+      "tag": "llama3.1:8b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 4.9,
+      "memory_gb": 6.6,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "writing"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Llama 3.1 Community License",
+      "licence_source_url": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/llama3.1/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "qwen3-8b",
+      "name": "Qwen3 8B",
+      "family": "Qwen",
+      "size_class": "medium",
+      "params_b": 8,
+      "tag": "qwen3:8b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 5.2,
+      "memory_gb": 7.0,
+      "memory_basis": "estimate",
+      "context_k": 40,
+      "goals": [
+        "chat",
+        "writing",
+        "coding"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Apache 2.0",
+      "licence_source_url": "https://huggingface.co/Qwen/Qwen3-8B",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/qwen3/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "gemma3-12b",
+      "name": "Gemma 3 12B",
+      "family": "Gemma",
+      "size_class": "large",
+      "params_b": 12,
+      "tag": "gemma3:12b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 8.2,
+      "memory_gb": 10.4,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "writing"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Gemma Terms of Use",
+      "licence_source_url": "https://ollama.com/library/gemma3",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/gemma3/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "deepseek-r1-14b",
+      "name": "DeepSeek R1 14B (distilled)",
+      "family": "DeepSeek",
+      "size_class": "large",
+      "params_b": 14,
+      "tag": "deepseek-r1:14b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 9.0,
+      "memory_gb": 11.4,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "coding"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "MIT License (weights); this distilled size is derived from a Qwen model",
+      "licence_source_url": "https://ollama.com/library/deepseek-r1",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/deepseek-r1/tags",
+      "read_date": "2026-11-10",
+      "note": "Reasoning model. It writes out its thinking, so replies take longer."
+    },
+    {
+      "id": "gpt-oss-20b",
+      "name": "gpt-oss 20B",
+      "family": "gpt-oss",
+      "size_class": "large",
+      "params_b": 20,
+      "tag": "gpt-oss:20b",
+      "quant": "not stated on the source page",
+      "quant_basis": "not found on the source page",
+      "file_gb": 14.0,
+      "memory_gb": 17.1,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "writing",
+        "coding"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Apache 2.0",
+      "licence_source_url": "https://ollama.com/library/gpt-oss",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/gpt-oss/tags",
+      "read_date": "2026-11-10",
+      "note": ""
+    },
+    {
+      "id": "qwen3-32b",
+      "name": "Qwen3 32B",
+      "family": "Qwen",
+      "size_class": "xl",
+      "params_b": 32,
+      "tag": "qwen3:32b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 20.0,
+      "memory_gb": 24.0,
+      "memory_basis": "estimate",
+      "context_k": 40,
+      "goals": [
+        "chat",
+        "writing",
+        "coding"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Apache 2.0",
+      "licence_source_url": "https://huggingface.co/Qwen/Qwen3-8B",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/qwen3/tags",
+      "read_date": "2026-11-10",
+      "note": "Licence read on the Qwen3 8B model card. The 32B card was not read."
+    },
+    {
+      "id": "llama31-70b",
+      "name": "Llama 3.1 70B",
+      "family": "Llama",
+      "size_class": "xl",
+      "params_b": 70,
+      "tag": "llama3.1:70b",
+      "quant": "Q4_K_M",
+      "quant_basis": "inferred: the tag shares a digest with a tag named q4_K_M",
+      "file_gb": 43.0,
+      "memory_gb": 50.5,
+      "memory_basis": "estimate",
+      "context_k": 128,
+      "goals": [
+        "chat",
+        "writing"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "Llama 3.1 Community License",
+      "licence_source_url": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+      "apps": [
+        "ollama"
+      ],
+      "gpu_only": false,
+      "source_url": "https://ollama.com/library/llama3.1/tags",
+      "read_date": "2026-11-10",
+      "note": "Licence read on the Llama 3.1 8B model card. The 70B card was not read."
+    },
+    {
+      "id": "sdxl-base",
+      "name": "Stable Diffusion XL 1.0 base",
+      "family": "Stable Diffusion",
+      "size_class": "medium",
+      "params_b": 3,
+      "tag": "sd_xl_base_1.0.safetensors",
+      "quant": "full weights (safetensors)",
+      "quant_basis": "listed file name",
+      "file_gb": 6.94,
+      "memory_gb": 9.0,
+      "memory_basis": "estimate",
+      "context_k": 0,
+      "goals": [
+        "images"
+      ],
+      "goals_basis": "editorial judgement, not a benchmark",
+      "licence": "CreativeML Open RAIL++-M",
+      "licence_source_url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0",
+      "apps": [
+        "comfyui"
+      ],
+      "gpu_only": true,
+      "source_url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/tree/main",
+      "read_date": "2026-11-10",
+      "note": "Image model. Needs a graphics card or an Apple chip to be usable. The ComfyUI page says it can run large open models on as low as 4 GB VRAM and 8 GB RAM, which this tool does not assume."
+    }
+  ]
+}

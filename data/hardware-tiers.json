@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "note": "Hardware tiers by memory only. No products, no prices. Tiers are our own grouping, not a source claim.",
+  "tiers": [
+    {
+      "id": "t8",
+      "label": "Entry",
+      "vram_gb": 6,
+      "unified_gb": 8,
+      "ram_gb": 16
+    },
+    {
+      "id": "t12",
+      "label": "Mid",
+      "vram_gb": 12,
+      "unified_gb": 16,
+      "ram_gb": 32
+    },
+    {
+      "id": "t16",
+      "label": "Upper mid",
+      "vram_gb": 16,
+      "unified_gb": 24,
+      "ram_gb": 32
+    },
+    {
+      "id": "t24",
+      "label": "Enthusiast",
+      "vram_gb": 24,
+      "unified_gb": 32,
+      "ram_gb": 64
+    },
+    {
+      "id": "t48",
+      "label": "Workstation",
+      "vram_gb": 48,
+      "unified_gb": 64,
+      "ram_gb": 128
+    },
+    {
+      "id": "t64",
+      "label": "Large memory",
+      "vram_gb": 64,
+      "unified_gb": 96,
+      "ram_gb": 128
+    }
+  ]
+}
