@@ -43,7 +43,7 @@ window.WIR_DATA = {
     ],
     "source_url": "https://lmstudio.ai/docs/app/system-requirements",
     "read_date": "2026-11-10",
-    "note": "Another app that runs many of the text models. macOS needs an Apple chip and macOS 14 or newer. Check its catalog for each model."
+    "note": "Another local app. This tool has not checked which models it lists. macOS needs an Apple chip and macOS 14 or newer. Check its catalog."
    }
   },
   "models": [
