@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Will it run? Free local AI for your PC</title>
+<meta name="description" content="Enter your RAM, graphics memory and goal. See which free local AI models your PC can run. Nothing is uploaded.">
+<style>
+:root{--bg:#f6f7f8;--panel:#fff;--text:#14191e;--muted:#566472;--line:#d9dfe4;--accent:#1f6f5c;--well:#1e7b4a;--slow:#8a6a00;--no:#b3392f;--well-bg:#e4f4ea;--slow-bg:#faf1d4;--no-bg:#fbe6e4}
+@media (prefers-color-scheme:dark){:root{--bg:#101418;--panel:#1b2229;--text:#f2f5f7;--muted:#9fb0bd;--line:#2c3842;--accent:#58c4a8;--well:#6fd69a;--slow:#e0b341;--no:#ee8077;--well-bg:#17301f;--slow-bg:#33290c;--no-bg:#3a1c19}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+main{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.9rem;line-height:1.15;margin:8px 0 6px}
+h2{font-size:1.2rem;margin:32px 0 10px}
+p{margin:0 0 12px}
+.lede{color:var(--muted);font-size:1.05rem}
+form,.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+label{display:block;font-weight:600;margin:0 0 4px}
+.field{margin-bottom:14px}
+.hint{color:var(--muted);font-size:.875rem;font-weight:400;display:block}
+select,input[type=number]{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);min-height:44px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+.check input{margin-top:5px;width:20px;height:20px}
+button{font:inherit;font-weight:600;padding:10px 16px;min-height:44px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+@media (prefers-color-scheme:dark){button{color:#08130f}}
+button.ghost{background:transparent;color:var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.err{color:var(--no);font-weight:600;min-height:1.4em}
+ul.results{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.item{background:var(--panel);border:1px solid var(--line);border-left-width:6px;border-radius:10px;padding:12px 14px}
+.item.well{border-left-color:var(--well)}.item.slow{border-left-color:var(--slow)}.item.no{border-left-color:var(--no)}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.name{font-weight:700;overflow-wrap:anywhere}
+.badge{font-size:.85rem;font-weight:700;padding:2px 10px;border-radius:99px}
+.well .badge{background:var(--well-bg);color:var(--well)}.slow .badge{background:var(--slow-bg);color:var(--slow)}.no .badge{background:var(--no-bg);color:var(--no)}
+.meta{color:var(--muted);font-size:.9rem;overflow-wrap:anywhere}
+.meta a{color:var(--accent)}
+.other{margin-top:18px}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.tablewrap{overflow-x:auto}
+canvas{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block;margin-bottom:10px}
+.small{font-size:.875rem;color:var(--muted)}
+footer{margin-top:40px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>Will it run?</h1>
+<p class="lede">Tell us your PC. We tell you which free local AI to run, and what to buy. Everything happens in this page. Nothing is uploaded.</p>
+
+<form id="form" novalidate>
+  <div class="field">
+    <label for="os">Operating system</label>
+    <select id="os"><option value="windows">Windows</option><option value="macos">macOS</option><option value="linux">Linux</option></select>
+  </div>
+  <div class="field check" id="appleRow" hidden>
+    <input type="checkbox" id="apple" checked>
+    <label for="apple" style="font-weight:600;margin:0">Apple chip (M1 or newer)<span class="hint">Apple chips share one memory pool. Untick for an older Intel Mac.</span></label>
+  </div>
+  <div class="field">
+    <label for="ram"><span id="ramLabel">Memory (RAM) in GB</span><span class="hint" id="ramHint"></span></label>
+    <input id="ram" type="number" inputmode="decimal" min="1" step="1" placeholder="16">
+  </div>
+  <div class="field" id="vramRow">
+    <label for="vram">Graphics memory (VRAM) in GB<span class="hint">Enter 0 if you have no separate graphics card. Find it in Task Manager, Performance, GPU, Dedicated GPU memory.</span></label>
+    <input id="vram" type="number" inputmode="decimal" min="0" step="1" placeholder="0">
+  </div>
+  <div class="field">
+    <label for="goal">What do you want to do?</label>
+    <select id="goal"><option value="chat">Chat</option><option value="writing">Writing</option><option value="coding">Coding help</option><option value="images">Make images</option></select>
+  </div>
+  <div class="err" id="err" role="alert"></div>
+  <div class="row"><button type="submit">Show what runs</button><button type="button" class="ghost" id="detect">Fill in what the browser can tell</button></div>
+  <p class="small" style="margin-top:10px" id="detectNote"></p>
+</form>
+
+<section id="out" hidden aria-live="polite">
+  <h2>Your results</h2>
+  <p class="small" id="summary"></p>
+  <ul class="results" id="matches"></ul>
+  <details class="other"><summary>Models for other goals</summary><ul class="results" id="others" style="margin-top:10px"></ul></details>
+
+  <h2>What to buy</h2>
+  <p class="small">Hardware tiers by memory for your goal. No products and no prices, because prices move. Memory is the number that matters most.</p>
+  <div class="panel tablewrap"><table id="tiers"><thead><tr><th>Tier</th><th id="tierMemHead">Memory</th><th>Newly runs well</th></tr></thead><tbody></tbody></table></div>
+
+  <h2>Share your result</h2>
+  <canvas id="card" width="1200" height="630" aria-label="Result card"></canvas>
+  <div class="row"><button type="button" id="save">Save the card as a picture</button></div>
+</section>
+
+<footer class="small">
+  <p><strong>Limits.</strong> Every memory figure is an estimate: the model file size from a source page, times 1.15, plus 1 GB. Speed classes are rough, not benchmarks. Models and apps change often, so each row shows the page it came from and the date it was read. Wrong figure? Open an issue on the repo.</p>
+  <p>Model and app names are used as facts with sources, not as endorsements. Source: <a href="https://github.com/rishsadh/will-it-run">github.com/rishsadh/will-it-run</a>. MIT licence.</p>
+</footer>
+</main>
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="card.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.WIR_DATA;
+  var $ = function (id) { return document.getElementById(id); };
+  var lastRows = null, lastHw = null, lastGoal = null;
+
+  function syncOs() {
+    var mac = $("os").value === "macos";
+    $("appleRow").hidden = !mac;
+    var apple = mac && $("apple").checked;
+    $("vramRow").hidden = apple;
+    $("ramLabel").textContent = apple ? "Unified memory in GB" : "Memory (RAM) in GB";
+    $("ramHint").textContent = apple ? "Apple menu, About This Mac, Memory." : "";
+  }
+
+  function fill(el, text) { el.textContent = text; return el; }
+  function make(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+
+  function renderItem(r) {
+    var li = make("li", "item " + r.verdict);
+    var top = make("div", "top");
+    top.appendChild(make("span", "name", r.name));
+    top.appendChild(make("span", "badge", r.label));
+    li.appendChild(top);
+    li.appendChild(make("div", "meta", r.reason));
+    var app = make("div", "meta");
+    if (r.apps.length) {
+      app.appendChild(document.createTextNode("App: "));
+      r.apps.forEach(function (a, i) {
+        if (i) app.appendChild(document.createTextNode(", "));
+        var link = make("a", "", a.name); link.href = a.url; link.rel = "noopener"; app.appendChild(link);
+      });
+      app.appendChild(document.createTextNode(". File about " + r.file_gb + " GB (" + r.quant + ")."));
+    } else {
+      app.textContent = "No app on the list for your operating system. File about " + r.file_gb + " GB.";
+    }
+    li.appendChild(app);
+    var src = make("div", "meta");
+    src.appendChild(document.createTextNode("Estimate. Licence: " + r.licence + ". Source read " + r.read_date + ": "));
+    var s = make("a", "", "page"); s.href = r.source_url; s.rel = "noopener"; src.appendChild(s);
+    li.appendChild(src);
+    return li;
+  }
+
+  function render(rows, hw, goal) {
+    var m = $("matches"), o = $("others");
+    m.textContent = ""; o.textContent = "";
+    rows.forEach(function (r) { (r.match ? m : o).appendChild(renderItem(r)); });
+    var well = rows.filter(function (r) { return r.match && r.verdict === "well"; }).length;
+    $("summary").textContent = well ? well + " models for this goal run well on your PC." : "No model for this goal runs well on your PC. See the tiers below.";
+    var kind = hw.apple ? "apple" : "gpu";
+    var tiers = WIR.whatToBuy(D.models, D.tiers, goal, kind);
+    $("tierMemHead").textContent = hw.apple ? "Unified memory" : "Graphics memory";
+    var tb = document.querySelector("#tiers tbody"); tb.textContent = "";
+    tiers.forEach(function (t) {
+      var tr = make("tr");
+      tr.appendChild(make("td", "", t.label));
+      tr.appendChild(make("td", "", t.memory_gb + " GB"));
+      tr.appendChild(make("td", "", t.unlocks.length ? t.unlocks.join(", ") : "Nothing new"));
+      tb.appendChild(tr);
+    });
+    drawCard(rows, hw, goal);
+    $("out").hidden = false;
+  }
+
+  function drawCard(rows, hw, goal) {
+    var c = $("card"), ctx = c.getContext("2d");
+    WIRCard.drawCard(ctx, WIRCard.cardSpec(rows, hw, goal));
+  }
+
+  function run(e) {
+    if (e) e.preventDefault();
+    $("err").textContent = "";
+    try {
+      var hw = WIR.normaliseHardware({ os: $("os").value, ram_gb: $("ram").value, vram_gb: $("vram").value, apple: $("os").value === "macos" && $("apple").checked });
+      var goal = $("goal").value;
+      var rows = WIR.evaluate(D.models, hw, goal);
+      lastRows = rows; lastHw = hw; lastGoal = goal;
+      render(rows, hw, goal);
+    } catch (err) {
+      $("err").textContent = err.message.indexOf("ram_gb") === 0 ? "Enter your memory in GB, for example 16." : "Check your numbers: " + err.message + ".";
+      $("out").hidden = true;
+    }
+  }
+
+  function detect() {
+    var notes = [];
+    var ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+    var os = /mac/i.test(ua) ? "macos" : /win/i.test(ua) ? "windows" : /linux|x11/i.test(ua) ? "linux" : "";
+    if (os) { $("os").value = os; notes.push("operating system"); }
+    if (navigator.deviceMemory) { $("ram").value = navigator.deviceMemory; notes.push("memory (browsers report at most 8 GB, so check it)"); }
+    syncOs();
+    $("detectNote").textContent = notes.length ? "Filled in: " + notes.join(", ") + ". Browsers hide the rest, so type your own numbers." : "Your browser reports nothing useful. Type your numbers.";
+  }
+
+  function save() {
+    if (!lastRows) return;
+    $("card").toBlob(function (blob) {
+      if (!blob) return;
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = "will-it-run.png";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    }, "image/png");
+  }
+
+  $("os").addEventListener("change", syncOs);
+  $("apple").addEventListener("change", syncOs);
+  $("form").addEventListener("submit", run);
+  $("detect").addEventListener("click", detect);
+  $("save").addEventListener("click", save);
+  syncOs();
+})();
+</script>
+</body>
+</html>
